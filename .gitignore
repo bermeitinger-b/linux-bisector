@@ -1,0 +1,5 @@
+*.tar*
+/src/**
+/pkg/**
+/linux/**
+built_commits.txt
