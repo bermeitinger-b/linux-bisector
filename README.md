@@ -26,7 +26,7 @@ Allows modifications to the deployment be made. Reboot after doing this.
 This is common for every archlinux derivative:
 
 ```sh
-sudo pacman -S base-devel gcc cache bc flex bison
+sudo pacman -S base-devel gcc ccache bc flex bison make
 ```
 
 ## Setting up ccache
