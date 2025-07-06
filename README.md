@@ -21,6 +21,23 @@ sudo frzr unlock
 
 Allows modifications to the deployment be made. Reboot after doing this.
 
+## EOS
+
+If you are using EndeavourOS you don't need to do anything more.
+
+## Other arch-based distros
+
+If you use systemd-boot or refind install [sbctl-dracut-conf](https://aur.archlinux.org/packages/sbctl-dracut-conf) from AUR, removing mkinitcpio.
+
+Remember to copy your kernel cmdline from /proc/cmdline into /etc/dracut.conf.d/01-cmdline.conf and run
+
+```sh
+sudo sbctl create-keys
+sudo dracut-regen
+```
+
+After this every time the kernel is installed a new initramfs will be generated.
+
 ## Setting up the build environment
 
 This is common for every archlinux derivative:
