@@ -2,7 +2,7 @@
 # Maintainer: Joaquín I. Aramendía (samsagax) <samsagaxg@gmail.com>
 
 pkgbase=linux-bisector
-pkgver=6.12.0_rc5
+pkgver=6.7.0
 pkgrel=1
 pkgdesc='My Linux branch'
 url="https://gitlab.com/NeroReflex/linux"
@@ -55,7 +55,7 @@ export MAKEFLAGS="-j$(nproc)"
 
 _make() {
   test -s version
-  make KERNELRELEASE="$(<version)" "$@"
+  LLVM=1 LLVM_IAS=1 make KERNELRELEASE="$(<version)" "$@"
 }
 
 prepare() {
@@ -64,9 +64,9 @@ prepare() {
   echo "Setting version..."
   echo "${pkgbase#linux}" > localversion.10-pkgname
   echo "-$pkgrel" > localversion.20-pkgrel
-  make defconfig
-  make -s kernelrelease > version
-  make mrproper
+  LLVM=1 LLVM_IAS=1 make defconfig
+  LLVM=1 LLVM_IAS=1 make -s kernelrelease > version
+  LLVM=1 LLVM_IAS=1 make mrproper
 
   local src
   for src in "${source[@]}"; do
