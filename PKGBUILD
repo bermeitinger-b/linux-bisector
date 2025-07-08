@@ -22,6 +22,10 @@ makedepends=(
   ccache
   git
 
+  llvm
+  clang
+  lld
+
   # htmldocs
   #graphviz
   #imagemagick
