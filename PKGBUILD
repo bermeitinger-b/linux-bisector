@@ -50,7 +50,7 @@ b2sums=(
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP=""
-export CC="ccache gcc"
+export CC="ccache clang"
 export MAKEFLAGS="-j$(nproc)"
 
 _make() {
