@@ -59,7 +59,7 @@ export MAKEFLAGS="-j$(nproc)"
 
 _make() {
   test -s version
-  LLVM=1 LLVM_IAS=1 make KERNELRELEASE="$(<version)" "$@"
+  LLVM=1 LLVM_IAS=1 KBUILD_BUILD_TIMESTAMP="" make CC="$CC" KERNELRELEASE="$(<version)" "$@"
 }
 
 prepare() {
@@ -98,7 +98,7 @@ pkgver() {
 
 build() {
   cd "linux"
-  _make CC="$CC" all
+  _make all
 }
 
 _package() {
