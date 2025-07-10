@@ -98,7 +98,7 @@ pkgver() {
 
 build() {
   cd "linux"
-  _make all
+  _make CC="$CC" all
 }
 
 _package() {
