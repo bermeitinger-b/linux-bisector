@@ -6,7 +6,7 @@ if [ ! -d "$basedir/linux" ]; then
     cd linux && git remote add linux-next https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git && git fetch linux-next && cd ..
 fi
 
-echo "" > "$basedir/built_commits.txt"
+echo "" >"$basedir/built_commits.txt"
 
 cd "$basedir/linux"
 git bisect start
