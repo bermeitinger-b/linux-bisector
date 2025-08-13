@@ -1,3 +1,4 @@
+linux/
 *.tar*
 /src/**
 /pkg/**

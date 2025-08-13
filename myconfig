@@ -1,0 +1,115 @@
+scripts/config --set-str DEFAULT_HOSTNAME "archlinux"
+scripts/config --enable BTRFS_FS
+
+# Enable zen4
+scripts/config -k --disable CONFIG_GENERIC_CPU
+scripts/config -k --enable CONFIG_MZEN4
+
+# Disable AMD_PMF
+scripts/config --disable AMD_PMF
+
+# Compress modules (_compress_modules=y)
+scripts/config --enable MODULE_COMPRESS_ZSTD
+
+## Custom options
+# Disable framebuffer
+scripts/config --disable FB
+scripts/config --disable FB_MAC
+
+# Disable INTEL
+scripts/config --disable CPU_SUP_CENTAUR
+scripts/config --disable CPU_SUP_HYGON
+scripts/config --disable CPU_SUP_INTEL
+scripts/config --disable DRM_I915
+scripts/config --disable DRM_XE
+scripts/config --disable INTEL_IDLE
+scripts/config --disable INTEL_MEI
+scripts/config --disable INTEL_TXT
+scripts/config --disable KVM_INTEL
+scripts/config --disable X86_INTEL_MCE
+scripts/config --disable X86_INTEL_PSTATE
+
+# Disable NVIDIA
+scripts/config --disable DRM_NOUVEAU
+scripts/config --disable DRM_NOUVEAU_BACKLIGHT
+scripts/config --disable FB_NVIDIA
+scripts/config --disable FB_NVIDIA_BACKLIGHT
+
+# Disable filesystems
+scripts/config --disable BCACHEFS_FS
+scripts/config --disable BEFS_FS
+scripts/config --disable EROFS_FS
+scripts/config --disable GFS2_FS
+scripts/config --disable JFFS2_FS
+scripts/config --disable JFS_FS
+scripts/config --disable MINIX_FS
+scripts/config --disable NFS_FS
+scripts/config --disable NILFS2_FS
+scripts/config --disable NTFS3_FS
+scripts/config --disable NTFS_FS
+scripts/config --disable OCFS2_FS
+scripts/config --disable OMFS_FS
+scripts/config --disable QFMT_V1
+scripts/config --disable REISERFS_FS
+scripts/config --disable SCSI
+scripts/config --disable SCSI_LOWLEVEL
+scripts/config --disable SCSI_PROC_FS
+scripts/config --disable UBIFS_FS
+scripts/config --disable XFS_FS
+scripts/config --disable ZONEFS_FS
+
+# Disable various drivers
+scripts/config --disable ACCESSIBILITY
+scripts/config --disable AGP
+scripts/config --disable ATA_OVER_ETH
+scripts/config --disable BLK_DEV_FD
+scripts/config --disable CDROM_PKTCDVD
+scripts/config --disable DRM_ACCEL
+scripts/config --disable DRM_APPLETBDRM
+scripts/config --disable DRM_AST
+scripts/config --disable DRM_BOCHS
+scripts/config --disable DRM_CIRRUS_QEMU
+scripts/config --disable DRM_MGAG200
+scripts/config --disable DRM_QXL
+scripts/config --disable DRM_RADEON
+scripts/config --disable DRM_SSD130X
+scripts/config --disable EISA
+scripts/config --disable FB_RIVA
+scripts/config --disable FIREWIRE
+scripts/config --disable FIREWIRE_NOSY
+scripts/config --disable FPGA
+scripts/config --disable GNSS
+scripts/config --disable GOOGLE_FIRMWARE
+scripts/config --disable HAMRADIO
+scripts/config --disable IEEE802154_DRIVERS
+scripts/config --disable IIO
+scripts/config --disable INFINIBAND
+scripts/config --disable INPUT_JOYSTICK
+scripts/config --disable ISDN
+scripts/config --disable MACINTOSH_DRIVERS
+scripts/config --disable MEDIA_ANALOG_TV_SUPPORT
+scripts/config --disable MEDIA_DIGITAL_TV_SUPPORT
+scripts/config --disable MEDIA_RADIO_SUPPORT
+scripts/config --disable MEMSTICK
+scripts/config --disable NET_FC
+scripts/config --disable NET_VENDOR_MELLANOX
+scripts/config --disable NFC
+scripts/config --disable PARPORT
+scripts/config --disable PCCARD
+scripts/config --disable PPP
+scripts/config --disable SLIP
+scripts/config --disable SUNRPC
+scripts/config --disable TAP
+scripts/config --disable USB_SERIAL
+scripts/config --disable X86_NUMACHIP
+scripts/config --disable X86_UV
+
+# Disable new modules
+scripts/config --disable GPIO
+scripts/config --disable GPIO_AMD8111
+scripts/config --disable GPIO_BT8XX
+scripts/config --disable GPIO_ML_IOH
+scripts/config --disable GPIO_IDIO_16
+scripts/config --disable GPIO_IDIO_24
+scripts/config --disable GPIO_RDC321X
+

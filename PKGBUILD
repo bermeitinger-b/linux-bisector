@@ -2,7 +2,7 @@
 # Maintainer: Joaquín I. Aramendía (samsagax) <samsagaxg@gmail.com>
 
 pkgbase=linux-bisector
-pkgver=6.7.0
+pkgver=6.15.0
 pkgrel=1
 pkgdesc='My Linux branch'
 url="https://gitlab.com/NeroReflex/linux"
@@ -35,15 +35,15 @@ makedepends=(
 options=('!strip')
 source=(
   "linux.tar.gz"
-  config  # the main kernel config file
-  config-chimera # our config that will be merged
+  config   # the main kernel config file
+  myconfig # my config file
 )
 
 validpgpkeys=(
-  ABAF11C65A2970B130ABE3C479BE3E4300411886  # Linus Torvalds
-  647F28654894E3BD457199BE38DBBDC86092693E  # Greg Kroah-Hartman
-  A2FF3A36AAA56654109064AB19802F8B0D70FC30  # Jan Alexander Steffens (heftig)
-  C7E7849466FE2358343588377258734B41C31549  # David Runge <dvzrv@archlinux.org>
+  ABAF11C65A2970B130ABE3C479BE3E4300411886 # Linus Torvalds
+  647F28654894E3BD457199BE38DBBDC86092693E # Greg Kroah-Hartman
+  A2FF3A36AAA56654109064AB19802F8B0D70FC30 # Jan Alexander Steffens (heftig)
+  C7E7849466FE2358343588377258734B41C31549 # David Runge <dvzrv@archlinux.org>
 )
 b2sums=(
   'SKIP'
@@ -66,10 +66,10 @@ prepare() {
   cd "linux"
 
   echo "Setting version..."
-  echo "${pkgbase#linux}" > localversion.10-pkgname
-  echo "-$pkgrel" > localversion.20-pkgrel
+  echo "${pkgbase#linux}" >localversion.10-pkgname
+  echo "-$pkgrel" >localversion.20-pkgrel
   LLVM=1 LLVM_IAS=1 make defconfig
-  LLVM=1 LLVM_IAS=1 make -s kernelrelease > version
+  LLVM=1 LLVM_IAS=1 make -s kernelrelease >version
   LLVM=1 LLVM_IAS=1 make mrproper
 
   local src
@@ -78,13 +78,13 @@ prepare() {
     src="${src##*/}"
     [[ $src = *.patch ]] || continue
     echo "Applying patch $src..."
-    patch -Np1 < "../$src"
+    patch -Np1 <"../$src"
   done
 
   echo "Setting config..."
   cp ../config .config
   _make olddefconfig
-  scripts/kconfig/merge_config.sh -m .config ../config-chimera
+  scripts/kconfig/merge_config.sh -m .config ../myconfig
   diff -u ../config .config || :
 
   echo "Prepared $pkgbase version $(<version)"
@@ -135,7 +135,7 @@ _package() {
 
   echo "Installing modules..."
   ZSTD_CLEVEL=19 _make INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 \
-    DEPMOD=/doesnt/exist modules_install  # Suppress depmod
+    DEPMOD=/doesnt/exist modules_install # Suppress depmod
 
   # remove build links
   rm "$modulesdir"/build
@@ -204,14 +204,14 @@ _package-headers() {
   local file
   while read -rd '' file; do
     case "$(file -Sib "$file")" in
-      application/x-sharedlib\;*)      # Libraries (.so)
-        strip -v $STRIP_SHARED "$file" ;;
-      application/x-archive\;*)        # Libraries (.a)
-        strip -v $STRIP_STATIC "$file" ;;
-      application/x-executable\;*)     # Binaries
-        strip -v $STRIP_BINARIES "$file" ;;
-      application/x-pie-executable\;*) # Relocatable binaries
-        strip -v $STRIP_SHARED "$file" ;;
+    application/x-sharedlib\;*) # Libraries (.so)
+      strip -v $STRIP_SHARED "$file" ;;
+    application/x-archive\;*) # Libraries (.a)
+      strip -v $STRIP_STATIC "$file" ;;
+    application/x-executable\;*) # Binaries
+      strip -v $STRIP_BINARIES "$file" ;;
+    application/x-pie-executable\;*) # Relocatable binaries
+      strip -v $STRIP_SHARED "$file" ;;
     esac
   done < <(find "$builddir" -type f -perm -u+x ! -name vmlinux -print0)
 
