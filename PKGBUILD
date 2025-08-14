@@ -2,7 +2,7 @@
 # Maintainer: Joaquín I. Aramendía (samsagax) <samsagaxg@gmail.com>
 
 pkgbase=linux-bisector
-pkgver=6.15.0
+pkgver=6.14.0
 pkgrel=1
 pkgdesc='My Linux branch'
 url="https://gitlab.com/NeroReflex/linux"
@@ -54,7 +54,7 @@ b2sums=(
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP=""
-export CC="ccache clang"
+export CC="ccache cc"
 export MAKEFLAGS="-j$(nproc)"
 
 _make() {
