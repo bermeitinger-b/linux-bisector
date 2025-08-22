@@ -2,7 +2,7 @@
 # Maintainer: Joaquín I. Aramendía (samsagax) <samsagaxg@gmail.com>
 
 pkgbase=linux-bisector
-pkgver=6.14.0
+pkgver=v6.17.rc2.r397.gdeb6c5d08f8b
 pkgrel=1
 pkgdesc='My Linux branch'
 url="https://gitlab.com/NeroReflex/linux"
@@ -92,8 +92,9 @@ prepare() {
 
 pkgver() {
   cd "linux"
-  local ver=$(make kernelversion | sed 's/-/_/g')
-  echo $ver
+  local ver
+  ver="$(cat pkgver.txt)"
+  echo "${ver}"
 }
 
 build() {
